@@ -1,3 +1,5 @@
+package tests;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -5,24 +7,22 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 
-public class PracticeFormTest {
+public class PracticeFormTest extends BaseTest {
 
-    WebDriver driver;
 
     @Test
     public void practiceFormTest() {
 
-        driver = new ChromeDriver();
-        // navigam catre pagine website-ului
-        driver.get("https://demoqa.com/");
-        //facem fereastra browser-ului maximize
-        driver.manage().window().maximize();
-        //identificam meniul dorit si facem click pe el;
+//        driver = new ChromeDriver();
+//        // navigam catre pagine website-ului
+//        driver.get("https://demoqa.com/");
+//        //facem fereastra browser-ului maximize
+//        driver.manage().window().maximize();
+//        //identificam meniul dorit si facem click pe el;
         WebElement FormMenu = driver.findElement(By.xpath("//h5[text()='Forms']"));
         //actionam butonul pe meniul de mai sus;
         // facem scroll pana in dreptul elementului pe care vrem sa actionam;

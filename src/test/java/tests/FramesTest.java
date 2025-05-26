@@ -1,3 +1,5 @@
+package tests;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -6,12 +8,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class FramesTest {
-    WebDriver driver;
+public class FramesTest extends BaseTest {
 
     @Test
     public void framesTest() {
-        openBrowser();
         chooseMenu();
         chooseSubMenu();
         interactWithFrameOne();
@@ -20,13 +20,13 @@ public class FramesTest {
     }
 
     //facem o metoda care deschide un browser;
-    public void openBrowser() {
-        driver = new ChromeDriver();
-        // navigam catre pagine website-ului
-        driver.get("https://demoqa.com/");
-        //facem fereastra browser-ului maximize
-        driver.manage().window().maximize();
-    }
+//    public void openBrowser() {
+//        driver = new ChromeDriver();
+//        // navigam catre pagine website-ului
+//        driver.get("https://demoqa.com/");
+//        //facem fereastra browser-ului maximize
+//        driver.manage().window().maximize();
+//    }
     //facem o metoda care alege un meniu;
 
     public void chooseMenu() {
@@ -51,9 +51,9 @@ public class FramesTest {
         alertsSubMenu.click();
     }
 
-    public void closeBrowser() {
-        driver.quit();
-    }
+//    public void closeBrowser() {
+//        driver.quit();
+//    }
     public void interactWithFrameOne(){
         WebElement frameOneElement= driver.findElement(By.id("frame1"));
         //schimbare de focus pe frame(prima pagina);
