@@ -1,22 +1,18 @@
+package tests;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.swing.*;
-
-public class DropTest {
-    WebDriver driver;
+public class DropTest extends BaseTest {
 
     @Test
     public void droppableTest() {
-        openBrowser();
         chooseMenu();
         chooseSubMenu();
         pickAndDropElement();
@@ -24,13 +20,13 @@ public class DropTest {
     }
 
     //facem o metoda care deschide un browser;
-    public void openBrowser() {
-        driver = new ChromeDriver();
-        // navigam catre pagine website-ului
-        driver.get("https://demoqa.com/");
-        //facem fereastra browser-ului maximize
-        driver.manage().window().maximize();
-    }
+//    public void openBrowser() {
+//        driver = new ChromeDriver();
+//        // navigam catre pagine website-ului
+//        driver.get("https://demoqa.com/");
+//        //facem fereastra browser-ului maximize
+//        driver.manage().window().maximize();
+//    }
 
     //facem o metoda care alege un meniu;
     public void chooseMenu() {
@@ -54,9 +50,9 @@ public class DropTest {
         WebElement alertsSubMenu = driver.findElement(By.xpath("//span[text()='Droppable']"));
         alertsSubMenu.click();
     }
-    public void closeBrowser() {
-        driver.quit();
-    }
+//    public void closeBrowser() {
+//        driver.quit();
+//    }
     public void pickAndDropElement(){
         WebElement draggableElement = driver.findElement(By.id("draggable"));
         WebElement droppableElement = driver.findElement(By.xpath("//div[@id='simpleDropContainer']//div[@id='droppable']"));

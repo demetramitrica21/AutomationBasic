@@ -1,3 +1,5 @@
+package tests;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,28 +11,25 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WindowsTest {
-    WebDriver driver;
+public class WindowsTest extends BaseTest {
 
     @Test
     public void windowsTest() {
-        openBrowser();
         chooseMenu();
         chooseSubMenu();
         interactWithNewTab();
         interactWithNewWindow();
         interactWithNewMessageWindow();
-//        closeBrowser();
     }
 
     //facem o metoda care deschide un browser;
-    public void openBrowser() {
-        driver = new ChromeDriver();
-        // navigam catre pagine website-ului
-        driver.get("https://demoqa.com/");
-        //facem fereastra browser-ului maximize
-        driver.manage().window().maximize();
-    }
+//    public void openBrowser() {
+//        driver = new ChromeDriver();
+//        // navigam catre pagine website-ului
+//        driver.get("https://demoqa.com/");
+//        //facem fereastra browser-ului maximize
+//        driver.manage().window().maximize();
+//    }
     //facem o metoda care alege un meniu;
 
     public void chooseMenu() {
@@ -87,10 +86,6 @@ public class WindowsTest {
         driver.close();
         //acum trebuie sa schimbam focusul;
         driver.switchTo().window(windowsList.get(0));
-    }
-
-    public void closeBrowser() {
-        driver.quit();
     }
     public void interactWithNewMessageWindow() {
         WebElement newWindowMessageButton = driver.findElement(By.id("messageWindowButton"));
