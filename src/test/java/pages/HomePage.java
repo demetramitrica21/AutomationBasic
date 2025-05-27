@@ -9,27 +9,31 @@ import org.testng.Assert;
 public class HomePage extends BasePage{
 
     //locatori specifici paginii;
-    private By alertsWindowsAndFramesMenu= By.xpath("//h5[text()='Alerts, Frame & Windows']");
     private By pageTitle= By.xpath("//img[@alt='Selenium Online Training']");
+    private By menuListLocator= By.xpath("//h5");
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    public void chooseMenu() {
-        //actionam butonul pe meniul de mai sus;
-        // facem scroll pana in dreptul elementului pe care vrem sa actionam;
-        scrollIntoElement(driver.findElement(alertsWindowsAndFramesMenu));
-        driver.findElement(alertsWindowsAndFramesMenu).click();
-    }
-    public void scrollIntoElement(WebElement alertsMenu) {
+    public void scrollPageDown() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", alertsMenu);
+        js.executeScript("window.scrollBy(0,400)");
     }
 
     @Override
     public void isPageLoaded() {
         Assert.assertEquals(driver.findElement(pageTitle).getDomAttribute("alt"),
                 "Selenium Online Training","Page is not loaded properly");
+    }
+
+    public void goToDesiredMenu(String menuValue) {
+        scrollPageDown();
+        for (WebElement menuName : driver.findElements(menuListLocator)) {
+            if (menuName.getText().equals(menuValue)) {
+                menuName.click();
+                break;
+            }
+        }
     }
 }
