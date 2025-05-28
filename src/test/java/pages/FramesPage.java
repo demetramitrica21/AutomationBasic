@@ -7,6 +7,7 @@ import org.testng.Assert;
 
 public class FramesPage extends BasePage {
     //locatori specifici paginii;
+    private By pageTitle= By.xpath("//h1[@class]");
     private By frameOneLocator= By.id("frame1");
     private By frameTextValueLocator= By.id("sampleHeading");
     private By frameTwoLocator= By.id("frame2");
@@ -20,7 +21,7 @@ public class FramesPage extends BasePage {
 
     @Override
     public void isPageLoaded() {
-
+        Assert.assertEquals(driver.findElement(pageTitle).getText(),"Frames","Page is not loaded properly");
     }
 
     public void interactWithFrameOne(){

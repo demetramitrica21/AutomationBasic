@@ -22,6 +22,7 @@ public class FramesTest extends BaseTest {
         commonPage.isPageLoaded();
         commonPage.goToDesiredSubMenu("Frames");
         FramesPage framesPage=new FramesPage(driver);
+        framesPage.isPageLoaded();
         framesPage.interactWithFrameOne();
         framesPage.interactWithFrameTwo();
     }
