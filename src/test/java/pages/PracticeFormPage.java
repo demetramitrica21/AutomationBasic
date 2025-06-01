@@ -82,6 +82,7 @@ public class PracticeFormPage extends BasePage {
 
     public void fillLastName() {
         driver.findElement(lastNameField).sendKeys(lastNameText);
+
     }
 
 
