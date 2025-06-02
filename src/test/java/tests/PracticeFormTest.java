@@ -168,7 +168,7 @@ public class PracticeFormTest extends BaseTest {
 //        List<WebElement> submitTableKeys = driver.findElements(By.xpath("//tbody//td[1]"));
 //        List<WebElement> submitTableValues = driver.findElements(By.xpath("//tbody//td[2]"));
 //        HashMap<String, String> actualValues = new HashMap<>();
-//        //indiferetn ca alegem submitTablekeys sau values, parcurge oricum ambele liste;
+//        //indiferent ca alegem submitTablekeys sau values, parcurge oricum ambele liste;
 //        for (int i = 0; i < submitTableKeys.size(); i++) {
 //            actualValues.put(submitTableKeys.get(i).getText(), submitTableValues.get(i).getText()); //parcurgem fiecare valoare/cheie si luam textul de pe ea si o adagam in HashMap;
 //        }

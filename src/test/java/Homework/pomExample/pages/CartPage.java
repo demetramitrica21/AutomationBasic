@@ -37,7 +37,6 @@ public class CartPage extends BasePage {
     }
 
     public void acceptCookiesPolicy() {
-        //inainte de a apasa pe butonul Ok, trebuie sa ne concentram pe cookie banner si folosim wait until element to be clickable;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement acceptCookies = wait.until(ExpectedConditions.elementToBeClickable(acceptCookiesLocator));
         if(acceptCookies.isDisplayed()) {
