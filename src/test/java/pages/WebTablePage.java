@@ -36,7 +36,7 @@ public class WebTablePage extends BasePage {
 
     @Override
     public void isPageLoaded() {
-        Assert.assertEquals(driver.findElement(pageTitle).getText(), "Web Tables", "Page is not loaded properly");
+        Assert.assertEquals(elementMethods.getTextFromElement(pageTitle), "Web Tables", "Page is not loaded properly");
     }
 
     public void webTablePageFlow(){
@@ -47,7 +47,7 @@ public class WebTablePage extends BasePage {
     }
 
     public int getTableSize() {
-        initialTableSize = driver.findElements(tableRowList).size();
+        initialTableSize = elementMethods.getElements(tableRowList).size();
         System.out.println("Numarul initial de randuri in tabel este: " + initialTableSize);
         return initialTableSize;
     }
@@ -55,26 +55,26 @@ public class WebTablePage extends BasePage {
     //facem o metoda noua care adauga rand nou in tabel, dand click pe ADD;
 
     public void clickToAddNewRecord() {
-        driver.findElement(addNewRecordButton).click();
+        elementMethods.clickElement(addNewRecordButton);
     }
 
     //facem o metoda care sa completeze toate campurile din formular;
 
     public void fillFormValues() {
-        driver.findElement(firstNameField).sendKeys(firstName);
-        driver.findElement(lastNameField).sendKeys(lastName);
-        driver.findElement(emailAddressField).sendKeys(email);
-        driver.findElement(ageField).sendKeys(age);
-        driver.findElement(salaryField).sendKeys(salary);
-        driver.findElement(departmentField).sendKeys(department);
-        driver.findElement(submitButtonField).click();
+        elementMethods.fillElement(firstNameField,firstName);
+        elementMethods.fillElement(lastNameField,lastName);
+        elementMethods.fillElement(emailAddressField,email);
+        elementMethods.fillElement(ageField,age);
+        elementMethods.fillElement(salaryField,salary);
+        elementMethods.fillElement(departmentField,department);
+        elementMethods.clickElement(submitButtonField);
     }
 
     //facem o metoda care sa valideze ca am adaugat o intrare noua in tabel si sa verifice valorile pe care le-am dat;
     public void validateThatNewRecordsAreAddedProperly() {
-        Assert.assertTrue(driver.findElements(tableRowList).size() > initialTableSize, "There are no new entries in the table!, initial table size: " +
-                initialTableSize + " is the same with actual table size: " + driver.findElements(tableRowList).size());
-        String actualTableValues = driver.findElements(tableRowList).get(driver.findElements(tableRowList).size() - 1).getText();
+        Assert.assertTrue(elementMethods.getElements(tableRowList).size() > initialTableSize, "There are no new entries in the table!, initial table size: " +
+                initialTableSize + " is the same with actual table size: " + elementMethods.getElements(tableRowList).size());
+        String actualTableValues = elementMethods.getElements(tableRowList).get(elementMethods.getElements(tableRowList).size() - 1).getText();
         System.out.println("New record values are: " + actualTableValues);
         Assert.assertTrue(actualTableValues.contains(firstName), "First name value is not correct. Expected first Name: " + firstName);
         Assert.assertTrue(actualTableValues.contains(lastName), "Last name value is not correct. Expected last Name: " + lastName);

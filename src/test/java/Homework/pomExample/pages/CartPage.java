@@ -12,6 +12,9 @@ import pages.BasePage;
 import java.time.Duration;
 
 public class CartPage extends BasePage {
+
+    WebDriverWait wait;
+
     //locatori specifici;
     private By pageTitle = By.xpath("//span[@class='Heading u-h4']");
     private By acceptCookiesLocator = By.id("shopify-pc__banner__btn-accept");
@@ -29,6 +32,8 @@ public class CartPage extends BasePage {
 
     public CartPage(WebDriver driver) {
         super(driver);
+        //initializarea WebDriver-ului wait;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @Override
@@ -48,27 +53,22 @@ public class CartPage extends BasePage {
     public void addItemToCart(String productName) {
         driver.findElement(clickSearchIconLocator).click();
         driver.findElement(typeProductInSearchBarLocator).sendKeys(productName);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         //Wait until element is visible, not just present
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(searchResultsLocator)));
+        waitForElement(searchResultsLocator);
         scrollIntoElement(driver.findElement(searchResultsLocator));
         driver.findElement(clickOnDesiredItemLocator).click();
         closePopUpBox();
         driver.findElement(chooseDesiredSizeLocator).click();
         driver.findElement(addItemToCartLocator).click();
-        WebDriverWait waitForTheSideBar = new WebDriverWait(driver, Duration.ofSeconds(7));
-        waitForTheSideBar.until(ExpectedConditions.visibilityOf(driver.findElement(sideBarCartLocator)));
-        WebDriverWait waitForTheItemCart = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitForTheItemCart.until(ExpectedConditions.visibilityOf(driver.findElement(cartItemLocator)));
+        waitForElement(sideBarCartLocator);
+        waitForElement(cartItemLocator);
         Assert.assertTrue(driver.findElement(cartItemLocator).isDisplayed(),"The item was not added to the cart properly");
         //refresh the page
         driver.navigate().refresh();
         //go to cart again and check if the item is still there after refreshing the page;
         driver.findElement(cartIconLocator).click();
-        WebDriverWait waitForTheSideBarAgain = new WebDriverWait(driver, Duration.ofSeconds(7));
-        waitForTheSideBarAgain.until(ExpectedConditions.visibilityOf(driver.findElement(sideBarCartLocator)));
-        WebDriverWait waitToCheckTheCart = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitToCheckTheCart.until(ExpectedConditions.visibilityOf(driver.findElement(cartItemLocator)));
+        waitForElement(cartIconLocator);
+        waitForElement(cartItemLocator);
         Assert.assertTrue(driver.findElement(cartItemLocator).isDisplayed(),"The item is not there after refresh");
     }
 
@@ -85,4 +85,7 @@ public class CartPage extends BasePage {
         js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
+    public void waitForElement(By locator){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
 }

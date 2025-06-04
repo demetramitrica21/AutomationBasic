@@ -24,48 +24,36 @@ public class WindowsPage extends BasePage {
 
     @Override
     public void isPageLoaded() {
-        Assert.assertEquals(driver.findElement(pageTitle).getText(), "Browser Windows", "Page is not loaded properly");
+        Assert.assertEquals(elementMethods.getTextFromElement(pageTitle), "Browser Windows", "Page is not loaded properly");
     }
 
     public void interactWithNewTab() {
-        driver.findElement(newTabButton).click();
+        elementMethods.clickElement(newTabButton);
         // declaram o lista de ferestre: noi avem 2 ferestre;
-        List<String> windowsList = new ArrayList<>(driver.getWindowHandles());
-        //noua ne trebuie focus pe al doilea tab, care are indexul 1;
-        driver.switchTo().window(windowsList.get(1));
-        //identificam elementul pe care este textul;
-        Assert.assertEquals(driver.findElement(windowsTextValidationLocator).getText(), expectedText, "Text is not displayed properly");
+        windowsMethods.switchToWindow(1);
+        Assert.assertEquals(elementMethods.getTextFromElement(windowsTextValidationLocator), expectedText, "Text is not displayed properly");
         //driver close iti inchide doar tab-ul si driver.quit inchide intreaga instanta, toate taburile;
-        driver.close();
+        windowsMethods.closeWindowOrTab();
         //acum trebuie sa schimbam focusul;
-        driver.switchTo().window(windowsList.get(0));
+        windowsMethods.switchToWindow(0);
     }
 
     public void interactWithNewWindow() {
-        driver.findElement(newWindowButton).click();
-        // declaram o lista de ferestre: noi avem 2 ferestre;
-        List<String> windowsList = new ArrayList<>(driver.getWindowHandles());
-        //noua ne trebuie focus pe al doilea tab, care are indexul 1;
-        driver.switchTo().window(windowsList.get(1));
-        Assert.assertEquals(driver.findElement(windowsTextValidationLocator).getText(), expectedText, "Text is not displayed properly");
+        elementMethods.clickElement(newWindowButton);
+        windowsMethods.switchToWindow(1);
+        Assert.assertEquals(elementMethods.getTextFromElement(windowsTextValidationLocator), expectedText, "Text is not displayed properly");
         //driver close iti inchide doar tab-ul si driver.quit inchide intreaga instanta, toate taburile;
-        driver.close();
+        windowsMethods.closeWindowOrTab();
         //acum trebuie sa schimbam focusul;
-        driver.switchTo().window(windowsList.get(0));
+        windowsMethods.switchToWindow(0);
     }
 
     public void interactWithNewMessageWindow() {
-        driver.findElement(newWindowMessageButton).click();
+        elementMethods.clickElement(newWindowMessageButton);
         // declaram o lista de ferestre: noi avem 2 ferestre;
-        List<String> windowsList = new ArrayList<>(driver.getWindowHandles());
-        //noua ne trebuie focus pe al doilea tab, care are indexul 1;
-        if (windowsList.size() > 1) {
-            System.out.println("A new window is successfully opened");
-        } else {
-            System.out.println("New window cannot be opened");
-        }
-        driver.switchTo().window(windowsList.get(1));
-        driver.close();
-        driver.switchTo().window(windowsList.get(0));
+        windowsMethods.newMessageWindow();
+        windowsMethods.switchToWindow(1);
+        windowsMethods.closeWindowOrTab();
+        windowsMethods.switchToWindow(0);
     }
 }

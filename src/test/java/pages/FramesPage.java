@@ -21,21 +21,21 @@ public class FramesPage extends BasePage {
 
     @Override
     public void isPageLoaded() {
-        Assert.assertEquals(driver.findElement(pageTitle).getText(),"Frames","Page is not loaded properly");
+        Assert.assertEquals(elementMethods.getTextFromElement(pageTitle),"Frames","Page is not loaded properly");
     }
 
     public void interactWithFrameOne(){
         //schimbare de focus pe frame(prima pagina);
-        driver.switchTo().frame(driver.findElement(frameOneLocator));
-        Assert.assertEquals(driver.findElement(frameTextValueLocator).getText(), expectedText, "Text is not displayed properly");
-        System.out.println("Frame one text is: " + driver.findElement(frameTextValueLocator).getText());
-        driver.switchTo().defaultContent(); //shimbam focusul pe pagina initiala;
+        frameMethods.switchToFrame(frameOneLocator);
+        Assert.assertEquals(elementMethods.getTextFromElement(frameTextValueLocator), expectedText, "Text is not displayed properly");
+        System.out.println("Frame one text is: " + elementMethods.getTextFromElement(frameTextValueLocator));
+        frameMethods.switchToDefaultPage();
     }
     public void interactWithFrameTwo(){
         //schimbare de focus pe frame(prima pagina);
-        driver.switchTo().frame(driver.findElement(frameTwoLocator));
-        Assert.assertEquals(driver.findElement(frameTextValueLocator).getText(), expectedText, "Text is not displayed properly");
-        System.out.println("Frame two text is: " + driver.findElement(frameTextValueLocator).getText());
-        driver.switchTo().defaultContent(); //shimbam focusul pe pagina initiala;
+       frameMethods.switchToFrame(frameTwoLocator);
+        Assert.assertEquals(elementMethods.getTextFromElement(frameTextValueLocator), expectedText, "Text is not displayed properly");
+        System.out.println("Frame two text is: " + elementMethods.getTextFromElement(frameTextValueLocator));
+        frameMethods.switchToDefaultPage();
     }
 }
