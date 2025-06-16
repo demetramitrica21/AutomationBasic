@@ -16,8 +16,6 @@ public class WindowsPage extends BasePage {
     private By newWindowButton = By.id("windowButton");
     private By newWindowMessageButton = By.id("messageWindowButton");
 
-    String expectedText = "This is a sample page";
-
     public WindowsPage(WebDriver driver) {
         super(driver);
     }
@@ -27,21 +25,21 @@ public class WindowsPage extends BasePage {
         Assert.assertEquals(elementMethods.getTextFromElement(pageTitle), "Browser Windows", "Page is not loaded properly");
     }
 
-    public void interactWithNewTab() {
+    public void interactWithNewTab(String expectedTextValue) {
         elementMethods.clickElement(newTabButton);
         // declaram o lista de ferestre: noi avem 2 ferestre;
         windowsMethods.switchToWindow(1);
-        Assert.assertEquals(elementMethods.getTextFromElement(windowsTextValidationLocator), expectedText, "Text is not displayed properly");
+        Assert.assertEquals(elementMethods.getTextFromElement(windowsTextValidationLocator), expectedTextValue, "Text is not displayed properly");
         //driver close iti inchide doar tab-ul si driver.quit inchide intreaga instanta, toate taburile;
         windowsMethods.closeWindowOrTab();
         //acum trebuie sa schimbam focusul;
         windowsMethods.switchToWindow(0);
     }
 
-    public void interactWithNewWindow() {
+    public void interactWithNewWindow(String expectedTextValue) {
         elementMethods.clickElement(newWindowButton);
         windowsMethods.switchToWindow(1);
-        Assert.assertEquals(elementMethods.getTextFromElement(windowsTextValidationLocator), expectedText, "Text is not displayed properly");
+        Assert.assertEquals(elementMethods.getTextFromElement(windowsTextValidationLocator), expectedTextValue, "Text is not displayed properly");
         //driver close iti inchide doar tab-ul si driver.quit inchide intreaga instanta, toate taburile;
         windowsMethods.closeWindowOrTab();
         //acum trebuie sa schimbam focusul;

@@ -10,9 +10,13 @@ import org.testng.annotations.Test;
 import pages.CommonPage;
 import pages.HomePage;
 import pages.WindowsPage;
+import propertyUtility.PropertyUtility;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static constants.MenuConstants.ALERTS_FRAMES_WINDOWS_MENU;
+import static constants.SubMenuConstants.WINDOWS_SUBMENU;
 
 public class WindowsTest extends BaseTest {
 
@@ -20,14 +24,15 @@ public class WindowsTest extends BaseTest {
     public void windowsTest() {
         HomePage homePage= new HomePage(driver);
         homePage.isPageLoaded();
-        homePage.goToDesiredMenu("Alerts, Frame & Windows");
+        homePage.goToDesiredMenu(ALERTS_FRAMES_WINDOWS_MENU);
         CommonPage commonPage=new CommonPage(driver);
         commonPage.isPageLoaded();
-        commonPage.goToDesiredSubMenu("Browser Windows");
+        commonPage.goToDesiredSubMenu(WINDOWS_SUBMENU );
         WindowsPage windowsPage=new WindowsPage(driver);
+        propertyUtility= new PropertyUtility("WindowsTest");
         windowsPage.isPageLoaded();
-        windowsPage.interactWithNewTab();
-        windowsPage.interactWithNewWindow();
+        windowsPage.interactWithNewTab(propertyUtility.getPropertyValue("expectedText"));
+        windowsPage.interactWithNewWindow(propertyUtility.getPropertyValue("expectedText"));
         windowsPage.interactWithNewMessageWindow();
     }
 

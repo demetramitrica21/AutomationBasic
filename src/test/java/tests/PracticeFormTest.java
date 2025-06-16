@@ -8,10 +8,15 @@ import org.testng.annotations.Test;
 import pages.CommonPage;
 import pages.HomePage;
 import pages.PracticeFormPage;
+import propertyUtility.PropertyUtility;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static constants.MenuConstants.FORMS_MENU;
+import static constants.SubMenuConstants.PRACTICE_FORM_SUBMENU;
 
 
 public class PracticeFormTest extends BaseTest {
@@ -21,13 +26,16 @@ public class PracticeFormTest extends BaseTest {
     public void practiceFormTest() {
         HomePage homePage= new HomePage(driver);
         homePage.isPageLoaded();
-        homePage.goToDesiredMenu("Forms");
+        homePage.goToDesiredMenu(FORMS_MENU);
         CommonPage commonPage= new CommonPage(driver);
         commonPage.isPageLoaded();
-        commonPage.goToDesiredSubMenu("Practice Form");
+        commonPage.goToDesiredSubMenu(PRACTICE_FORM_SUBMENU);
         PracticeFormPage practiceFormPage=new PracticeFormPage(driver);
+        propertyUtility = new PropertyUtility("PracticeFormTest");
+        Map<String,Object> practiceFormTestData  = propertyUtility.getAllProperties();
         practiceFormPage.isPageLoaded();
-        practiceFormPage.fillEntireForm();
+        practiceFormPage.fillEntireForm(practiceFormTestData);
+        practiceFormPage.validateThatExpectedValuesEqualActualValues(practiceFormTestData);
 
 
 //        driver = new ChromeDriver();
@@ -39,7 +47,7 @@ public class PracticeFormTest extends BaseTest {
 //        WebElement FormMenu = driver.findElement(By.xpath("//h5[text()='Forms']"));
 //        //actionam butonul pe meniul de mai sus;
 //        // facem scroll pana in dreptul elementului pe care vrem sa actionam;
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
 //        js.executeScript("arguments[0].scrollIntoView(true);", FormMenu);
 //        FormMenu.click();
 //        //identificam submeniul dorit si facem click pe el;

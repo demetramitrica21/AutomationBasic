@@ -4,8 +4,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.List;
 import java.util.function.Function;
@@ -78,18 +80,18 @@ public class ElementMethods {
     }
 
     public void chooseElementFromListByText(By locator, String textValue){
-        for (WebElement menuName : getElements(locator)) {
-            if (menuName.getText().equals(textValue)) {
-                menuName.click();
+        for (WebElement element : getElements(locator)) {
+            if (element.getText().equals(textValue)) {
+                element.click();
                 break;
             }
         }
     }
 
     public void chooseElementFromListByText(List<WebElement> elementsList, String textValue){
-        for (WebElement menuName : elementsList) {
-            if (menuName.getText().equals(textValue)) {
-                menuName.click();
+        for (WebElement element : elementsList) {
+            if (element.getText().equals(textValue)) {
+                element.click();
                 break;
             }
         }
@@ -103,4 +105,18 @@ public class ElementMethods {
     public String getTextFromElement(By locator){
         return getElement(locator).getText();
     }
+
+    public void selectElementByText(By locator, String textValue){
+        waitForElement(locator);
+        Select selectElement = new Select(driver.findElement(locator));
+        selectElement.selectByVisibleText(textValue);
+    }
+
+    public void uploadDocument(By locator, String pathValue){
+        String pictureFilePaths = "src/test/resources/picture/" + pathValue;
+        File file = new File(pictureFilePaths);
+        getElement(locator).sendKeys(file.getAbsolutePath());
+    }
+
+
 }

@@ -12,8 +12,6 @@ public class FramesPage extends BasePage {
     private By frameTextValueLocator= By.id("sampleHeading");
     private By frameTwoLocator= By.id("frame2");
 
-    String expectedText = "This is a sample page";
-
 
     public FramesPage(WebDriver driver) {
         super(driver);
@@ -24,17 +22,17 @@ public class FramesPage extends BasePage {
         Assert.assertEquals(elementMethods.getTextFromElement(pageTitle),"Frames","Page is not loaded properly");
     }
 
-    public void interactWithFrameOne(){
+    public void interactWithFrameOne(String expectedTextValue){
         //schimbare de focus pe frame(prima pagina);
         frameMethods.switchToFrame(frameOneLocator);
-        Assert.assertEquals(elementMethods.getTextFromElement(frameTextValueLocator), expectedText, "Text is not displayed properly");
+        Assert.assertEquals(elementMethods.getTextFromElement(frameTextValueLocator), expectedTextValue, "Text is not displayed properly");
         System.out.println("Frame one text is: " + elementMethods.getTextFromElement(frameTextValueLocator));
         frameMethods.switchToDefaultPage();
     }
-    public void interactWithFrameTwo(){
+    public void interactWithFrameTwo(String expectedTextValue){
         //schimbare de focus pe frame(prima pagina);
        frameMethods.switchToFrame(frameTwoLocator);
-        Assert.assertEquals(elementMethods.getTextFromElement(frameTextValueLocator), expectedText, "Text is not displayed properly");
+        Assert.assertEquals(elementMethods.getTextFromElement(frameTextValueLocator), expectedTextValue, "Text is not displayed properly");
         System.out.println("Frame two text is: " + elementMethods.getTextFromElement(frameTextValueLocator));
         frameMethods.switchToDefaultPage();
     }

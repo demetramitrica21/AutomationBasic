@@ -12,16 +12,19 @@ import pages.CommonPage;
 import pages.DroppablePage;
 import pages.HomePage;
 
+import static constants.MenuConstants.INTERACTION_MENU;
+import static constants.SubMenuConstants.DROPPABLE_SUBMENU;
+
 public class DropTest extends BaseTest {
 
     @Test
     public void droppableTest() {
         HomePage homePage= new HomePage(driver);
         homePage.isPageLoaded();
-        homePage.goToDesiredMenu("Interactions");
+        homePage.goToDesiredMenu(INTERACTION_MENU);
         CommonPage commonPage=new CommonPage(driver);
         commonPage.isPageLoaded();
-        commonPage.goToDesiredSubMenu("Droppable");
+        commonPage.goToDesiredSubMenu(DROPPABLE_SUBMENU);
         DroppablePage droppablePage=new DroppablePage(driver);
         droppablePage.isPageLoaded();
         droppablePage.pickAndDropElement();

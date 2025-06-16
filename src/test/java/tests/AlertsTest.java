@@ -12,16 +12,19 @@ import pages.HomePage;
 
 import java.time.Duration;
 
+import static constants.MenuConstants.ALERTS_FRAMES_WINDOWS_MENU;
+import static constants.SubMenuConstants.ALERTS_SUBMENU;
+
 public class AlertsTest extends BaseTest {
 
     @Test
     public void alertsTest() {
         HomePage homePage= new HomePage(driver);
         homePage.isPageLoaded();
-        homePage.goToDesiredMenu("Alerts, Frame & Windows");
+        homePage.goToDesiredMenu(ALERTS_FRAMES_WINDOWS_MENU);
         CommonPage commonPage= new CommonPage(driver);
         commonPage.isPageLoaded();
-        commonPage.goToDesiredSubMenu("Alerts");
+        commonPage.goToDesiredSubMenu(ALERTS_SUBMENU);
         AlertsPage alertsPage= new AlertsPage(driver);
         alertsPage.isPageLoaded();
         alertsPage.interactWithFirstAlert();
