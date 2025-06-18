@@ -99,10 +99,11 @@ public class ElementMethods {
 
     public void pickAndDropElement(By actual, By next){
         waitForElement(actual);
-        action.dragAndDrop(getElement(actual),getElement(next)).release().perform();
+        action.clickAndHold(getElement(actual)).moveToElement(getElement(next)).release().build().perform();
     }
 
     public String getTextFromElement(By locator){
+        waitForElement(locator);
         return getElement(locator).getText();
     }
 
@@ -116,6 +117,14 @@ public class ElementMethods {
         String pictureFilePaths = "src/test/resources/picture/" + pathValue;
         File file = new File(pictureFilePaths);
         getElement(locator).sendKeys(file.getAbsolutePath());
+    }
+
+    public void setWait(Long miliSeconds){
+        try {
+            wait(miliSeconds);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

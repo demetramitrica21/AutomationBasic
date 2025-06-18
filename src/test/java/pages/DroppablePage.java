@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
+import java.time.Duration;
+
 public class DroppablePage extends BasePage {
     //locatori specifici;
     private By pageTitle = By.xpath("//h1[@class]");
@@ -22,9 +24,16 @@ public class DroppablePage extends BasePage {
     }
 
     public void pickAndDropElement() {
+        elementMethods.scrollPageDown("300");
         String initialTargetText = elementMethods.getTextFromElement(droppableElement); //am salvat textul de pe element intr-un string;
         elementMethods.pickAndDropElement(draggableElement,droppableElement);
-        Assert.assertNotEquals(elementMethods.getTextFromElement(droppableElement), initialTargetText, "Initial text is the same with actual text after element dropped");
-        System.out.println("Initial text is: " + initialTargetText + " Text after successful drop: " + elementMethods.getTextFromElement(droppableElement));
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+        String finalTargetText= elementMethods.getTextFromElement(droppableElement);
+        Assert.assertNotEquals(finalTargetText, initialTargetText, "Initial text is the same with actual text after element dropped");
+        System.out.println("Initial text is: " + initialTargetText + " Text after successful drop: " + finalTargetText);
     }
 }
